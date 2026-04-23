@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Warefa Dates</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="homepage.css">
 </head>
 <body>
 
@@ -20,7 +20,7 @@
                 <li><a href="#comments">Contact</a></li>
             </ul>
             <div class="nav-actions">
-                <a href="#" class="login-btn">Login</a>
+                <a href="login.php" class="login-btn">Login</a>
                 <a href="#" class="signup-btn">Sign Up</a>
             
                 <div class="cart-icon">
