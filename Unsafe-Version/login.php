@@ -17,6 +17,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["username"] = $row["username"];
         $_SESSION["role"] = $row["role"];
         $message = "Login successful!";
+           
+        // VULNERABLE: redirects any logged-in user to admin dashboard
+              header("Location: dashboard_admin.php");
+              exit();
     } else {
         $message = "Invalid username or password.";
     }
