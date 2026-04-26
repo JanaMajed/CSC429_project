@@ -17,6 +17,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["username"] = $row["username"];
         $_SESSION["role"] = $row["role"];
         $message = "Login successful!";
+
+         // Redirect user based on role
+    if ($row["role"] == "admin") {
+        header("Location: dashboard_admin.php");
+        exit();
+    }
+
+    if ($row["role"] == "user") {
+        header("Location: dashboard_user.php");
+        exit();
+    }
+        
     } else {
         $message = "Invalid username or password.";
     }
