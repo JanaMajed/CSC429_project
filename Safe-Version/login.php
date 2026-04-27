@@ -8,13 +8,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
 
-    // Vulnerable to SQL injection because user input is inserted directly into the query (try: ' ' OR 1=1 --  in username field or ' ' OR 1=1  in both password and username field)
-    $sql = "SELECT * FROM users WHERE username='$username' AND password='$password'"; 
-    // Insecure password handling: compares plain text password instead of using bcrypt
-    $result = mysqli_query($conn, $sql);
+// Secure against SQL injection because user input is separated from the query
+$stmt = mysqli_prepare($conn, "SELECT * FROM users WHERE username=?");
+mysqli_stmt_bind_param($stmt, "s", $username);
+mysqli_stmt_execute($stmt);
 
-    if ($row = mysqli_fetch_assoc($result)) {
-        $_SESSION["username"] = $row["username"];
+$result = mysqli_stmt_get_result($stmt);
+
+if ($row = mysqli_fetch_assoc($result)) {
+    // Secure password handling: compares entered password with bcrypt hashed password
+    if (password_verify($password, $row["password"])) {        $_SESSION["username"] = $row["username"];
         $_SESSION["role"] = $row["role"];
         $message = "Login successful!";
 
