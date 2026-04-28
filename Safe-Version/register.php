@@ -7,20 +7,34 @@ session_set_cookie_params([ //session cookie settings to protect the session tok
 
 session_start();
 include "db.php";
+
 $message = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
     $username = $_POST["username"];
     $password = $_POST["password"];
+    $email = $_POST["email"];
+    $credit_card = $_POST["credit_card"];
+
     // Secure password handling: password is hashed using bcrypt before storing
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+
     // Parameterized query prevents SQL injection by separating data from the query
-    $stmt = mysqli_prepare($conn, "INSERT INTO users (username, password, role) VALUES (?, ?, 'user')");
-    mysqli_stmt_bind_param($stmt, "ss", $username, $hashed_password);
+    $stmt = mysqli_prepare($conn,
+        "INSERT INTO users (username, password, email, credit_card, role) VALUES (?, ?, ?, ?, 'user')"
+    );
+
+    mysqli_stmt_bind_param($stmt, "ssss",
+        $username, $hashed_password, $email, $credit_card
+    );
+
     if (mysqli_stmt_execute($stmt)) {
         $message = "Registration successful!";
     } else {
         $message = "Error: " . mysqli_error($conn);
     }
+
     mysqli_stmt_close($stmt);
 }
 ?>
@@ -37,16 +51,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="login-card">
             <h1>Register</h1>
             <form method="POST" action="">
+
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" placeholder="Enter your username" required>
+
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+                <label for="credit_card">Credit Card</label>
+                <input type="text" id="credit_card" name="credit_card" placeholder="Enter your credit card number" required>
+
                 <button type="submit">Register</button>
             </form>
+
             <?php if ($message != ""): ?>
-                <p class="message"><?php echo $message; ?></p>
+                <p class="message"><?php echo htmlspecialchars($message); ?></p>
             <?php endif; ?>
+
         </div>
     </div>
 </body>
 </html>
+
