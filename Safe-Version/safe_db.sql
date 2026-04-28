@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 27, 2026 at 09:05 PM
+-- Generation Time: Apr 28, 2026 at 09:33 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -53,19 +53,21 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `role` varchar(20) NOT NULL
+  `role` varchar(20) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `credit_card` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `role`) VALUES
-(1, 'sarah044', 'sarah123', 'admin'),
-(2, 'RehafAdmin', 'Rehaf123', 'admin'),
-(3, 'HajarAlmeleehan', 'Hajar123', 'admin'),
-(4, 'Jana0022', 'Jana123', 'admin'),
-(5, 'SalehUser', 'ilovegaming', 'user');
+INSERT INTO `users` (`id`, `username`, `password`, `role`, `email`, `credit_card`) VALUES
+(1, 'sarah044', 'sarah123', 'admin', 'sarah044@gmail.com', '1111222233334444'),
+(2, 'RehafAdmin', 'Rehaf123', 'admin', 'rehafadmin@gmail.com', '2222333344445555'),
+(3, 'HajarAlmeleehan', 'Hajar123', 'admin', 'hajaralmeleehan@gmail.com', '3333444455556666'),
+(4, 'Jana0022', 'Jana123', 'admin', 'jana0022@gmail.com', '4444555566667777'),
+(5, 'SalehUser', 'ilovegaming', 'user', 'salehuser@gmail.com', '5555666677778888');
 
 --
 -- Indexes for dumped tables
