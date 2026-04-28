@@ -1,8 +1,13 @@
 <?php
+session_set_cookie_params([ //session cookie settings to protect the session token
+ 'secure' => true,
+ 'httponly' => true,
+ 'samesite' => 'Strict'
+]);
 session_start();
 include "../db.php";
 
-/* Safe VERSION
+/* SAFE VERSION
   
 */
 
