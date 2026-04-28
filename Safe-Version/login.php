@@ -4,6 +4,7 @@ session_set_cookie_params([ //session cookie settings to protect the session tok
  'httponly' => true,
  'samesite' => 'Strict'
 ]);
+
 session_start();
 include "db.php";
 
@@ -13,30 +14,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
 
-    // Vulnerable to SQL injection because user input is inserted directly into the query (try: ' ' OR 1=1 --  in username field or ' ' OR 1=1  in both password and username field)
-    $sql = "SELECT * FROM users WHERE username='$username' AND password='$password'"; 
-    // Insecure password handling: compares plain text password instead of using bcrypt
-    $result = mysqli_query($conn, $sql);
+    // Parameterized query prevents SQL injection by separating data from the query
+    $stmt = mysqli_prepare($conn, "SELECT * FROM users WHERE username = ?");
+    mysqli_stmt_bind_param($stmt, "s", $username);
+    mysqli_stmt_execute($stmt);
+
+    $result = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($result)) {
-        $_SESSION["username"] = $row["username"];
-        $_SESSION["role"] = $row["role"];
-        $message = "Login successful!";
 
-         // Redirect user based on role
-    if ($row["role"] == "admin") {
-        header("Location: dashboard_admin.php");
-        exit();
-    }
+        // Secure password handling: verifies the bcrypt hashed password
+        if (password_verify($password, $row["password"])) {
 
-    if ($row["role"] == "user") {
-        header("Location: dashboard_user.php");
-        exit();
-    }
-        
+            $_SESSION["username"] = $row["username"];
+            $_SESSION["role"] = $row["role"];
+            $message = "Login successful!";
+
+            // Redirect user based on role
+            if ($row["role"] == "admin") {
+                header("Location: dashboard_admin.php");
+                exit();
+            }
+
+            if ($row["role"] == "user") {
+                header("Location: dashboard_user.php");
+                exit();
+            }
+
+        } else {
+            $message = "Invalid username or password.";
+        }
+
     } else {
         $message = "Invalid username or password.";
     }
+
+    mysqli_stmt_close($stmt);
 }
 ?>
 
@@ -66,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </form>
 
             <?php if ($message != ""): ?>
-                <p class="message"><?php echo $message; ?></p>
+                <p class="message"><?php echo htmlspecialchars($message); ?></p>
             <?php endif; ?>
         </div>
     </div>
