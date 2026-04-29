@@ -7,6 +7,14 @@ session_set_cookie_params([ //session cookie settings to protect the session tok
 
 session_start();
 include "db.php";
+$secret_key = "12345678901234567890123456789012"; //secret key for encryption
+
+function encryptData($data, $key) {
+    $cipher = "AES-256-CBC"; // symmetric block cipher encryption
+    $iv = random_bytes(openssl_cipher_iv_length($cipher));
+    $encrypted = openssl_encrypt($data, $cipher, $key, 0, $iv);
+    return base64_encode($iv . $encrypted);
+}
 
 $message = "";
 
@@ -15,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
     $email = $_POST["email"];
-    $credit_card = $_POST["credit_card"];
+    $credit_card = encryptData($_POST["credit_card"], $secret_key); //encryption of credit card number
 
     // Secure password handling: password is hashed using bcrypt before storing
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
