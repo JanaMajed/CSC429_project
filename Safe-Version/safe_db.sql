@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 28, 2026 at 09:33 PM
+-- Generation Time: Apr 29, 2026 at 12:50 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -63,11 +63,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `email`, `credit_card`) VALUES
-(1, 'sarah044', 'sarah123', 'admin', 'sarah044@gmail.com', '1111222233334444'),
-(2, 'RehafAdmin', 'Rehaf123', 'admin', 'rehafadmin@gmail.com', '2222333344445555'),
-(3, 'HajarAlmeleehan', 'Hajar123', 'admin', 'hajaralmeleehan@gmail.com', '3333444455556666'),
-(4, 'Jana0022', 'Jana123', 'admin', 'jana0022@gmail.com', '4444555566667777'),
-(5, 'SalehUser', 'ilovegaming', 'user', 'salehuser@gmail.com', '5555666677778888');
+(6, 'lana', '$2y$10$dQCD.u4nL9nhzivMjo/7jOfVxjKj0HBcz8t8Bt795sP6S1lgtuF3K', 'user', 'lana044@gmail.com', 'pNLERHuRpt1nigkd3ooBS0QxWkw0Tzc2YkliV21EVnU5TTVvc3c9PQ=='),
+(7, ' SalehUser', '$2y$10$iypLoPD7GvknsZnBr17UGe2oiMh83fkCF.rbHSB/kpkLOSMs1XvN2', 'user', 'salehuser@gmail.com', 'jPSlcFw8Csuo2l9aLO3kOmNuSjZ6T1VITjlWQ2d5aEVZR0xXWFF6QmJTRzIzZkVuZ242K3lrbjk1dG89'),
+(8, 'sarah044', '$2y$10$MivNDljzbwvHikZ8tYr3bO7pdj5w95OLhaEAHcZh/LlYPZJClMEyW', 'admin', 'sarah044@gmail.com', 'sNR5SIJNOAb7KQsWuzFwRWVOSUxaQlE1MVpUeVBmbE8yaGs2Ym9CK2E0d0Frc2t0U1Urd0c0ZEgwaGc9'),
+(9, 'RehafAdmin', '$2y$10$XNlSn9hQxxNdjhW0yQ4mTOBxDz35uPJ/g7Duk6z8rVH.kNzM.qNm6', 'admin', 'rehafadmin@gmail.com', 'VxnObygBOC6aRfwR7JVWV3NYL3VOaG91TzdyTTdHV3VYbFhmSjZhWFc5ODdTa1F2ckhBcEdIajV2UGc9'),
+(10, 'HajarAlmeleehan', '$2y$10$fzZg1KT8q4DezCCk28fLMuxNje8VDOVFXhq0lf1inZF6L1VB5KoqK', 'admin', 'hajaralmeleehan@gmail.com', 'f1JZ7zTcHrViW6TAuanDQWhVR2xVL2Z4V0pvenBWWUlNT1R0UHZoOVpkTjlBakpIREhPbFY3MUVFaHc9'),
+(11, 'Jana0022', '$2y$10$pOW7PO5WGJGwsm9ve18AWOT9ZsxSfXzU3fHky2ZAmIxYwoOuUewyW', 'admin', 'jana0022@gmail.com', 'l4yBn6h/MxdS8XUENzrGBEdZblNCczhpVmNDYnh0S2xtYUxFVUV2QXVJRHVXTyt1dEVJVkNqTXhUNW89');
 
 --
 -- Indexes for dumped tables
@@ -99,7 +100,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
