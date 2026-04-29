@@ -55,6 +55,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+ <div class="navbar">
+    <a href="homepage/index.php">Home</a>
+    <a href="login.php">Login</a>
+</div>
     <div class="login-container">
         <div class="login-card">
             <h1>Register</h1>
