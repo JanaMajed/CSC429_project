@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 session_start();
 include "db.php";
 
@@ -9,10 +11,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
 
     // Vulnerable to SQL injection because user input is inserted directly into the query (try: ' ' OR 1=1 --  in username field or ' ' OR 1=1  in both password and username field)
-    $sql = "SELECT * FROM users WHERE username='$username' AND password='$password'"; 
+    // uses inscure MD5 hashing
+    $sql = "SELECT * FROM users WHERE username='$username' AND password=MD5('$password')"; 
     // Insecure password handling: compares plain text password instead of using bcrypt
     $result = mysqli_query($conn, $sql);
 
+    if (!$result) {
+        die("SQL Error: " . mysqli_error($conn));
+    }
     if ($row = mysqli_fetch_assoc($result)) {
         $_SESSION["username"] = $row["username"];
         $_SESSION["role"] = $row["role"];
