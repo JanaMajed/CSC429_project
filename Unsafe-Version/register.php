@@ -18,9 +18,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Sensitive data is stored in plain text (email and credit card)
 
     $hashed_password = md5($password);
-    
+
     $sql = "INSERT INTO users (username, password, email, credit_card, role) 
-            VALUES ('$username', '$password', '$email', '$credit_card', 'user')";
+            VALUES ('$username', '$hashed_password', '$email', '$credit_card', 'user')";
 
     if (mysqli_query($conn, $sql)) {
         $message = "Registration successful!";

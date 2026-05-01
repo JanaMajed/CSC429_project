@@ -1,11 +1,13 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 session_set_cookie_params([ //session cookie settings to protect the session token
  'secure' => true,
  'httponly' => true,
  'samesite' => 'Strict'
 ]);
 session_start();
-include "../db.php";
+include "db.php";
 
 /* SAFE VERSION
   
@@ -27,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { //no longer vulnerable to XSS attack
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Warefa Dates</title>
-    <link rel="stylesheet" href="homepage.css">
+    <link rel="stylesheet" href="homepage/homepage.css">
 </head>
 <body>
 
@@ -46,13 +48,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { //no longer vulnerable to XSS attack
         <div class="nav-actions">
 
             <?php if (isset($_SESSION["username"])): ?>
-                <a href="../dashboard_admin.php" class="login-btn">
+                <a href="dashboard_admin.php" class="login-btn">
                     <?php echo $_SESSION["username"]; ?>
                 </a>
-                <a href="../logout.php" class="signup-btn">Logout</a>
+                <a href="logout.php" class="signup-btn">Logout</a>
             <?php else: ?>
-                <a href="../login.php" class="login-btn">Login</a>
-                <a href="../register.php" class="signup-btn">Sign Up</a>
+                <a href="login.php" class="login-btn">Login</a>
+                <a href="register.php" class="signup-btn">Sign Up</a>
             <?php endif; ?>
 
             <div class="cart-icon">
@@ -82,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { //no longer vulnerable to XSS attack
         </div>
     </div>
 
-    <img src="palms.png" alt="Palms">
+    <img src="homepage/palms.png" alt="Palms">
 </section>
 
 <!-- Products -->
@@ -101,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { //no longer vulnerable to XSS attack
     <div class="products-grid">
 
         <div class="product-card">
-            <img src="Ajwa.png" alt="Ajwa">
+            <img src="homepage/Ajwa.png" alt="Ajwa">
             <h3>Ajwa Dates</h3>
             <p>Deep flavor, soft bite, premium quality.</p>
             <span>SAR 85</span>
@@ -109,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { //no longer vulnerable to XSS attack
         </div>
 
         <div class="product-card">
-            <img src="sukri.png" alt="Sukkari">
+            <img src="homepage/sukri.png" alt="Sukkari">
             <h3>Sukkari Dates</h3>
             <p>Golden sweetness with a delicate texture.</p>
             <span>SAR 70</span>
@@ -117,7 +119,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { //no longer vulnerable to XSS attack
         </div>
 
         <div class="product-card">
-            <img src="boxes.png" alt="Gift Box">
+            <img src="homepage/boxes.png" alt="Gift Box">
             <h3>Luxury Gift Box</h3>
             <p>Elegant packaging for special occasions.</p>
             <span>SAR 150</span>

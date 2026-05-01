@@ -11,9 +11,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
 
     // Vulnerable to SQL injection because user input is inserted directly into the query (try: ' ' OR 1=1 --  in username field or ' ' OR 1=1  in both password and username field)
-    // uses inscure MD5 hashing
+    // uses inscure MD5 hashing instead of using bcrypt
     $sql = "SELECT * FROM users WHERE username='$username' AND password=MD5('$password')"; 
-    // Insecure password handling: compares plain text password instead of using bcrypt
     $result = mysqli_query($conn, $sql);
 
     if (!$result) {
