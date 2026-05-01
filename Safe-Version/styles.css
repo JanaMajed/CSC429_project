@@ -171,6 +171,8 @@ body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #f8f4ee, #eef3e8);
     color: var(--text-dark);
+    min-height: 100vh;
+    padding-top: 70px;
 }
 
 a {
