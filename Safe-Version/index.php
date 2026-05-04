@@ -9,17 +9,18 @@ session_set_cookie_params([ //session cookie settings to protect the session tok
 session_start();
 include "db.php";
 
-/* SAFE VERSION
-  
+/* SAFE VERSION  
 */
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") { //no longer vulnerable to XSS attack because sanitization is done where strip_tags() removes HTML and scripts
+
+ if ($_SERVER["REQUEST_METHOD"] == "POST") {//no longer vulnerable to XSS attack because sanitization is done where strip_tags() removes HTML and scripts
     $name = strip_tags(trim($_POST["name"]));
     $comment = strip_tags(trim($_POST["comment"]));
 
-    $sql = "INSERT INTO comments (name, comment)
-            VALUES ('$name', '$comment')";
-    mysqli_query($conn, $sql);
+    $stmt = $conn->prepare("INSERT INTO comments (name, comment) VALUES (?, ?)");
+    $stmt->bind_param("ss", $name, $comment);
+    $stmt->execute();
+    $stmt->close();
 }
 ?>
 
