@@ -7,7 +7,8 @@ session_set_cookie_params([ //session cookie settings to protect the session tok
 
 session_start();
 include "db.php";
-$secret_key = "12345678901234567890123456789012"; //secret key for encryption
+$config = include("config.php");
+$secret_key = $config["ENCRYPTION_KEY"];// secret key for encryption from config.php to improve security and not mix it with the main logic
 
 function encryptData($data, $key) {
     $cipher = "AES-256-CBC"; // symmetric block cipher encryption
