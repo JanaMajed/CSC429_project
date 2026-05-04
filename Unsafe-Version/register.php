@@ -10,7 +10,7 @@ $message = "";
 
     // Vulnerable to SQL injection because user input is inserted directly into the query
     // Insecure password handling: password is hashed using an inscure method (MD5)
-    // Sensitive data is stored in plain text (email and credit card)
+    // Sensitive data is stored in plain text (credit card)
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
