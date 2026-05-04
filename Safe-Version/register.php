@@ -40,8 +40,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (mysqli_stmt_execute($stmt)) {
         $message = "Registration successful!";
-        header("Location: login.php");
-        exit();
     } else {
         $message = "Error: " . mysqli_error($conn);
     }
