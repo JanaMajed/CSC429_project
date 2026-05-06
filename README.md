@@ -26,7 +26,7 @@ The goal of this project is to:
 ---
 
 ##  Live Demo
-- ✅ **Safe Version:** https://warefadates.rehaf.dev  
+- ✅ **Safe Version:** https://warefadates.hajaralmeleehan.me
 - ❌ **Unsafe Version:** http://warefadates.janaalamer.me
 
 ---
