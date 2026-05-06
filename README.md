@@ -27,7 +27,7 @@ The goal of this project is to:
 
 ##  Live Demo
 - ✅ **Safe Version:** https://warefadates.rehaf.dev  
-- ❌ **Unsafe Version:** *(add your link here)*  
+- ❌ **Unsafe Version:** http://warefadates.janaalamer.me
 
 ---
 
@@ -101,7 +101,7 @@ This project highlights the following vulnerabilities and their secure solutions
 
 **Steps:**
 1. Go to the homepage comment field  
-2. Enter JavaScript code (e.g. `<script>alert('XSS')</script>`)  
+2. Enter JavaScript code (e.g. `<script>alert("XSS")</script>`)  
 3. Submit  
 
 **Unsafe Version:**  
