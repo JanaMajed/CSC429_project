@@ -7,6 +7,7 @@ session_set_cookie_params([ //session cookie settings to protect the session tok
 
 session_start();
 include "db.php";
+ 
 
 $message = "";
 
@@ -25,6 +26,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Secure password handling: verifies the bcrypt hashed password
         if (password_verify($password, $row["password"])) {
+
+            session_regenerate_id(true); // generates a new session ID after login
+ 
 
             $_SESSION["username"] = $row["username"];
             $_SESSION["role"] = $row["role"];
