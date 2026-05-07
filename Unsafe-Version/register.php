@@ -16,12 +16,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
     $email = $_POST["email"];
-    $credit_card = $_POST["credit_card"];
+    $credit_card = $_POST["credit_card"]; 
 
-    $hashed_password = md5($password);
+    $hashed_password = md5($password); //md5 hash --> weak password storage
 
     $sql = "INSERT INTO users (username, password, email, credit_card, role) 
-            VALUES ('$username', '$hashed_password', '$email', '$credit_card', 'user')";
+            VALUES ('$username', '$hashed_password', '$email', '$credit_card', 'user')"; //vulnerable to SQL injection and credit card stored as plaintext
 
     if (mysqli_query($conn, $sql)) {
         $message = "Registration successful!";
