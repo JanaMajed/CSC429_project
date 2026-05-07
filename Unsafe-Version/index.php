@@ -3,13 +3,12 @@ session_start();
 include "db.php";
 
 /* UNSAFE VERSION
-  
 */
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST["name"];
     $comment = $_POST["comment"];
-
+//inserts comments directly into database
     $sql = "INSERT INTO comments (name, comment)
             VALUES ('$name', '$comment')";
     mysqli_query($conn, $sql);
@@ -209,7 +208,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     while ($row = mysqli_fetch_assoc($result)) {
         echo "<div class='testimonial-card'>";
         echo "<h4>" . $row["name"] . "</h4>";
-        echo  $row["comment"]; //This line prints user comment directly into HTML
+        echo  $row["comment"]; //This line prints user comment directly (no sanatization) making it vulnerable to XSS attack
         echo "</div><br>";
     }
     ?>
