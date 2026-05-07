@@ -7,6 +7,7 @@ No access control.
 Anyone can open this page directly from the URL.
 */
 
+// Retrieve username from session
 $username = $_SESSION['username'] ?? "Guest";
 ?>
 
