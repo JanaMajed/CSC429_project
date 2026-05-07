@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-
+// Remove all session data
 $_SESSION = [];
 
-
+// Delete the session cookie from the browser
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
 
@@ -19,7 +19,7 @@ if (ini_get("session.use_cookies")) {
     );
 }
 
-
+// Completely destroy the session
 session_destroy();
 ?>
 
@@ -31,7 +31,7 @@ session_destroy();
 
     <link rel="stylesheet" href="styles.css">
 
-   
+   <!-- Redirect user to login page after 2 seconds -->
     <meta http-equiv="refresh" content="2;url=login.php">
 </head>
 
