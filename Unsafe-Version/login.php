@@ -23,7 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["role"] = $row["role"];
         $message = "Login successful!";
            
-        // VULNERABLE 
+        // VULNERABLE, as user can change from URL
+    
     if ($row["role"] === "admin") {
             header("Location: dashboard_admin.php");
             exit();
