@@ -11,11 +11,12 @@ SAFE VERSION:
 Only logged-in users with role = user can access this page.
 */
 
+// Check if the user is logged in
 if (!isset($_SESSION['username']) || !isset($_SESSION['role'])) {
     header("Location: login.php");
     exit();
 }
-
+// Prevent unauthorized roles from accessing the page
 if ($_SESSION['role'] !== "user") {
     header("Location: login.php");
     exit();
