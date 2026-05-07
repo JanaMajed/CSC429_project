@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+// Remove all session data and log the user out
 session_unset();
 session_destroy();
 ?>
