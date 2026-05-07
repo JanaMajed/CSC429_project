@@ -5,9 +5,9 @@ session_start();
 VULNERABLE VERSION:
 No access control is applied here.
 Any user can access by
-http://localhost/security_project/vulnerable-version/dashboard_admin.php
+http://localhost/security_project/Unsafe-version/dashboard_admin.php
 */
-
+// Get logged-in username from session
 $username = $_SESSION['username'] ?? "Guest";
 ?>
 
