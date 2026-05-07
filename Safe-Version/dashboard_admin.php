@@ -7,7 +7,7 @@ session_set_cookie_params([ //session cookie settings to protect the session tok
 session_start();
 
 /* ACCESS CONTROL */
-if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') { //only admins can enter (cannot gain privilege escalation  from URL)
     header("Location: login.php");
     exit();
 }
