@@ -1,8 +1,8 @@
 <?php
 session_set_cookie_params([ //session cookie settings to protect the session token
- 'secure' => true,
- 'httponly' => true,
- 'samesite' => 'Strict'
+ 'secure' => true,//ensures the session cookie is only sent over HTTPS connections
+ 'httponly' => true,//prevents JavaScript from accessing the session cookie
+ 'samesite' => 'Strict' //prevents the browser from sending the cookie in cross-site requests
 ]);
 
 session_start();
@@ -10,9 +10,9 @@ include "db.php";
 $config = include("config.php");
 $secret_key = $config["ENCRYPTION_KEY"];// secret key for encryption from config.php to improve security and not mix it with the main logic
 
-function encryptData($data, $key) {
-    $cipher = "AES-256-CBC"; // symmetric block cipher encryption
-    $iv = random_bytes(openssl_cipher_iv_length($cipher));
+function encryptData($data, $key) { //function used to encrypt sensitive user information before storing it in the database
+    $cipher = "AES-256-CBC"; // symmetric block cipher encryption (AES-256-CBC was selected because it is considered a strong and widely used encryption algorithm)
+    $iv = random_bytes(openssl_cipher_iv_length($cipher));//generates a random Initialization Vector (IV)
     $encrypted = openssl_encrypt($data, $cipher, $key, 0, $iv);
     return base64_encode($iv . $encrypted);
 }
@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
     $email = $_POST["email"];
-    $credit_card = encryptData($_POST["credit_card"], $secret_key); //encryption of credit card number
+    $credit_card = encryptData($_POST["credit_card"], $secret_key); //encryption of credit card number before storing it in the database
 
     // Secure password handling: password is hashed using bcrypt before storing
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username, $hashed_password, $email, $credit_card
     );
 
-    if (mysqli_stmt_execute($stmt)) {
+    if (mysqli_stmt_execute($stmt)) { // stores the user information in the database
         $message = "Registration successful!";
     } else {
         $message = "Error: " . mysqli_error($conn);
