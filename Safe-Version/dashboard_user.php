@@ -1,8 +1,8 @@
 <?php
 session_set_cookie_params([ //session cookie settings to protect the session token
- 'secure' => true,
- 'httponly' => true,
- 'samesite' => 'Strict'
+ 'secure' => true, //ensures the session cookie is only transmitted over HTTPS connections
+ 'httponly' => true, //prevents JavaScript from accessing the session cookie
+ 'samesite' => 'Strict' //helps prevent the browser from sending cookies in cross-site requests
 ]);
 session_start();
 
