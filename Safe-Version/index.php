@@ -2,9 +2,9 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 session_set_cookie_params([ //session cookie settings to protect the session token
- 'secure' => true,
- 'httponly' => true,
- 'samesite' => 'Strict'
+ 'secure' => true,//ensures the session cookie is only sent over HTTPS connections
+ 'httponly' => true,//prevents JavaScript from accessing the session cookie
+ 'samesite' => 'Strict'//prevents the browser from sending the cookie in cross-site requests
 ]);
 session_start();
 include "db.php";
@@ -15,7 +15,8 @@ include "db.php";
 
  if ($_SERVER["REQUEST_METHOD"] == "POST") {//no longer vulnerable to XSS attack because sanitization is done where strip_tags() removes HTML and scripts
     $name = strip_tags(trim($_POST["name"]));
-    $comment = strip_tags(trim($_POST["comment"]));
+    $comment = strip_tags(trim($_POST["comment"]));  //trim() removes extra spaces before and after the input
+   
 
     $stmt = $conn->prepare("INSERT INTO comments (name, comment) VALUES (?, ?)");
     $stmt->bind_param("ss", $name, $comment);
@@ -216,8 +217,8 @@ $result = mysqli_query($conn, "SELECT * FROM comments ORDER BY id DESC");
 
 while ($row = mysqli_fetch_assoc($result)) {
     echo "<div class='testimonial-card'>";
-    echo "<h4>" . htmlspecialchars($row["name"], ENT_QUOTES, "UTF-8") . "</h4>";
-    echo "<p>" . htmlspecialchars($row["comment"], ENT_QUOTES, "UTF-8") . "</p>";
+    echo "<h4>" . htmlspecialchars($row["name"], ENT_QUOTES, "UTF-8") . "</h4>"; //htmlspecialchars() converts special characters into safe HTML entities
+    echo "<p>" . htmlspecialchars($row["comment"], ENT_QUOTES, "UTF-8") . "</p>"; //safely displays the comment while preventing XSS attacks
     echo "</div><br>";
 }
 ?>
