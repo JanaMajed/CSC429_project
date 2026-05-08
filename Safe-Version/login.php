@@ -1,8 +1,8 @@
 <?php
 session_set_cookie_params([ //session cookie settings to protect the session token
- 'secure' => true,
- 'httponly' => true,
- 'samesite' => 'Strict'
+ 'secure' => true, //ensures the session cookie is only transmitted over HTTPS connections
+ 'httponly' => true,//prevents JavaScript from accessing the session cookie
+ 'samesite' => 'Strict' //prevents the browser from sending the cookie in cross-site requests
 ]);
 
 session_start();
@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Secure password handling: verifies the bcrypt hashed password
         if (password_verify($password, $row["password"])) {
 
-            session_regenerate_id(true); // generates a new session ID after login
+            session_regenerate_id(true); // generates a new session ID after login to prevent fixation attacks
  
 
             $_SESSION["username"] = $row["username"];
