@@ -8,7 +8,7 @@ include "db.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST["name"];
     $comment = $_POST["comment"];
-//inserts comments directly into database
+//inserts comments directly into database making it vulnerable to XSS attacks
     $sql = "INSERT INTO comments (name, comment)
             VALUES ('$name', '$comment')";
     mysqli_query($conn, $sql);
