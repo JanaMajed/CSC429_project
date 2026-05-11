@@ -70,7 +70,7 @@ This project highlights the following vulnerabilities and their secure solutions
 
 **Steps:**
 1. Go to the **Login** page  
-2. Enter in both fields: ' OR '1'='1'#
+2. Enter in both fields: 'OR 1=1#
 3. Submit  
 
 **Unsafe Version:**  
